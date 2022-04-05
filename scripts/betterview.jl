@@ -1,7 +1,7 @@
 using GLMakie, MeshIO, GeometryBasics
 using Colors
 using FileIO, Downloads
-earth_img = load(Downloads.download("https://upload.wikimedia.org/wikipedia/commons/5/56/Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg"))
+#earth_img = load(Downloads.download("https://upload.wikimedia.org/wikipedia/commons/5/56/Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg"))
 
 function gridpoints(; nstep=1, lo=-20, hi=20)
     x = y = lo:nstep:hi
@@ -24,9 +24,15 @@ camobj = load("./Meshes/camera.obj")
 lampobj = load("./Meshes/lamp.obj")
 set_theme!()
 fig = Figure(resolution=(2200, 1200), backgroundcolor=:grey90)
-ax = LScene(fig[1:3, 1:3]; show_axis=false)
+ax = LScene(fig[1:4, 1:3]; show_axis=false)
 axnav = LScene(fig[1, 4]; show_axis=false)
 axcam = LScene(fig[2, 4]; show_axis=false)
+
+menu = Menu(fig, options=["A", "B", "C"])
+fig[3, 4] = vgrid!(
+    Label(fig, "Options", width=nothing),
+    menu; tellheight=false, width=200)
+
 # not to render
 wireframe!(ax, x, y, z; color=(:black, 0.1),
     transparency=true)
@@ -49,7 +55,7 @@ zoom!(ax.scene, cameracontrols(ax.scene), 0.5)
 cam = cameracontrols(ax.scene)
 
 lines!(axcam, [Point3f(cam.eyeposition[]...), Point3f(cam.lookat[]...)],
-    transparency = true)
+    transparency=true)
 
 mesh_faces = decompose(TriangleFace{Int}, camobj)
 mesh_vertices = decompose(Point{3,Float64}, camobj)
@@ -58,29 +64,27 @@ meshcam = GeometryBasics.Mesh(mesh_vadd, mesh_faces)
 #r = [2, 2.0, 2]
 objmesh = mesh!(axcam, meshcam; color=colors[5])
 #scale!(objmesh, r[1], r[2], r[3])
-surface!(axcam, x, y, z; colormap =([:black, colors[1]]),
+surface!(axcam, x, y, z; colormap=([:black, colors[1]]),
     transparency=true)
 #lamp
 lamp_faces = decompose(TriangleFace{Int}, lampobj)
 lamp_vertices = decompose(Point{3,Float64}, lampobj)
-lamp_vadd = [(4*m .+ msphere.attributes.lightposition[]) for m in lamp_vertices]
+lamp_vadd = [(4 * m .+ msphere.attributes.lightposition[]) for m in lamp_vertices]
 lampcam = GeometryBasics.Mesh(lamp_vadd, lamp_faces)
-mesh!(axcam, lampcam, color = :orange, shading = false)
+mesh!(axcam, lampcam, color=:orange, shading=false)
 rotate!(axcam.scene, 2.5π)
-#=
-# not working
-on(events(ax.scene).mousebutton, priority=0) do event
-    if event.button == Mouse.left
-        if event.action == Mouse.press
-            mobj.color[] = RGBAf(0.361, 0.722, 0.361, 1.0)
-        else
-            # do something else when the mouse button is released
-            mobj.color[] = RGBAf(0.91, 0.122, 0.361, 0.4)
-        end
-    end
-    # Do not consume the event
-    return Consume(false)
+
+camcam = cameracontrols(axcam.scene)
+camnav = cameracontrols(axnav.scene)
+
+onany(cam.upvector, cam.eyeposition, cam.lookat) do upvec, eye, la
+    update_cam!(axcam.scene, camcam, eye, la, upvec)
+    update_cam!(axnav.scene, camnav, eye, la, upvec)
 end
-=#
-save("./imgs/betterview.png", fig)
+
+on(menu.selection) do s
+    #create and delte sliders depending on s
+    sl_x = Slider(fig[4, 4], range=0:0.01:10, startvalue=3)
+end
+#save("./imgs/betterview.png", fig)
 fig
