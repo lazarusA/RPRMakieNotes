@@ -1,7 +1,8 @@
 using GLMakie, MeshIO, GeometryBasics
 using Colors
 using FileIO, Downloads
-#earth_img = load(Downloads.download("https://upload.wikimedia.org/wikipedia/commons/5/56/Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg"))
+using LinearAlgebra
+earth_img = load(Downloads.download("https://upload.wikimedia.org/wikipedia/commons/5/56/Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg"))
 
 function gridpoints(; nstep=1, lo=-20, hi=20)
     x = y = lo:nstep:hi
@@ -28,19 +29,22 @@ ax = LScene(fig[1:4, 1:3]; show_axis=false)
 axnav = LScene(fig[1, 4]; show_axis=false)
 axcam = LScene(fig[2, 4]; show_axis=false)
 
-menu = Menu(fig, options=["A", "B", "C"])
-fig[3, 4] = vgrid!(
-    Label(fig, "Options", width=nothing),
-    menu; tellheight=false, width=200)
+#menu = Menu(fig, options=["A", "B", "C"])
+#fig[3, 4] = vgrid!(
+#    Label(fig, "Options", width=nothing),
+#    menu; tellheight=false, width=200)
 
 # not to render
-wireframe!(ax, x, y, z; color=(:black, 0.1),
+grid = wireframe!(ax, x, y, z; color=(:black, 0.1),
     transparency=true)
-lines!(ax, [Point3f(-20, 0, 0), Point3f(20, 0, 0)],
+l1 = lines!(ax, [Point3f(-20, 0, 0), Point3f(20, 0, 0)],
     color=colors[1], linewidth=2, transparency=true)
-lines!(ax, [Point3f(0, -20, 0), Point3f(0, 20, 0)],
+l2 = lines!(ax, [Point3f(0, -20, 0), Point3f(0, 20, 0)],
     color=colors[2], linewidth=2, transparency=true)
 # up to here (leave them out)
+# delete!(grid)
+# delete!(l1)
+# delete!(l2)
 msphere = mesh!(ax, Sphere(Point3f(0), 4);
     color=earth_img, transparency=false,
     lightposition=Vec3f(-10, 10, 20))
@@ -53,7 +57,7 @@ text!(axnav, ["X", "Y", "Z"],
     align=(:center, :center), color=colors[1:3], textsize=22)
 zoom!(ax.scene, cameracontrols(ax.scene), 0.5)
 cam = cameracontrols(ax.scene)
-
+#=
 lines!(axcam, [Point3f(cam.eyeposition[]...), Point3f(cam.lookat[]...)],
     transparency=true)
 
@@ -72,19 +76,19 @@ lamp_vertices = decompose(Point{3,Float64}, lampobj)
 lamp_vadd = [(4 * m .+ msphere.attributes.lightposition[]) for m in lamp_vertices]
 lampcam = GeometryBasics.Mesh(lamp_vadd, lamp_faces)
 mesh!(axcam, lampcam, color=:orange, shading=false)
-rotate!(axcam.scene, 2.5π)
+GLMakie.rotate!(axcam.scene, 2.5π)
 
 camcam = cameracontrols(axcam.scene)
+=#
 camnav = cameracontrols(axnav.scene)
-
 onany(cam.upvector, cam.eyeposition, cam.lookat) do upvec, eye, la
-    update_cam!(axcam.scene, camcam, eye, la, upvec)
-    update_cam!(axnav.scene, camnav, eye, la, upvec)
+    update_cam!(axnav.scene, camnav, 3.5eye / norm(eye), la, upvec)
+    center!(axnav.scene)
 end
 
-on(menu.selection) do s
-    #create and delte sliders depending on s
-    sl_x = Slider(fig[4, 4], range=0:0.01:10, startvalue=3)
-end
+#on(menu.selection) do s
+#create and delte sliders depending on s
+#    sl_x = Slider(fig[4, 4], range=0:0.01:10, startvalue=3)
+#end
 #save("./imgs/betterview.png", fig)
 fig
