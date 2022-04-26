@@ -1,7 +1,28 @@
 # RPRMakieNotes
 Examples and utility scripts
 
-# A better view ?
+## Prelimilary examples to learn how to use RPRMakie.
+
+### sphere_plane_greysky
+<img src="./imgs/sphere_plane_greysky.png" width = "100%">
+
+### sphere_source_light
+
+<img src="./imgs/sphere_source_light.png" width = "100%">
+
+### earth_ina_julia_box
+
+<img src="./imgs/earth_ina_julia_box.png" width = "100%">
+
+### materials_julia_room
+
+<img src="./imgs/materials_julia_room.png" width = "100%">
+
+### earthquakes, WIP
+
+<img src="./imgs/earthquakes.png" width = "100%">
+
+### A better view ?
 
 <img src="./imgs/betterview.png" width = "100%">
 
