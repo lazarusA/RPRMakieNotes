@@ -1,26 +1,27 @@
 # RPRMakieNotes
-Examples and utility scripts
+Examples and utility scripts.
 
-## Prelimilary examples to learn how to use RPRMakie.
+Prelimilary examples to learn how to use RPRMakie.
 
 ### sphere_plane_greysky
-<img src="./imgs/sphere_plane_greysky.png" width = "100%">
+<p align="center"><a href="./src/sphere_plane_greysky.jl"> <img src="./imgs/sphere_plane_greysky.png" width = "100%"></p>
 
 ### sphere_source_light
 
-<img src="./imgs/sphere_source_light.png" width = "100%">
+<p align="center"><a href="./src/sphere_source_light.jl"> <img src="./imgs/sphere_source_light.png" width = "100%"></p>
 
 ### earth_ina_julia_box
 
-<img src="./imgs/earth_ina_julia_box.png" width = "100%">
+<p align="center"><a href="./src/earth_ina_julia_box.jl"> <img src="./imgs/earth_ina_julia_box.png" width = "100%"></p>
 
 ### materials_julia_room
 
-<img src="./imgs/materials_julia_room.png" width = "100%">
+<p align="center"><a href="./src/materials_julia_room.jl"> <img src="./imgs/materials_julia_room.png" width = "100%"></p>
 
-### earthquakes, WIP
+### earthquakes
 
-<img src="./imgs/earthquakes.png" width = "100%">
+<p align="center"><a href="./src/earthquakes.jl"> <img src="./imgs/earthquakes2.png" width = "100%"></p>
+
 
 ### A better view ?
 
