@@ -4,23 +4,23 @@ Examples and utility scripts.
 Prelimilary examples to learn how to use RPRMakie.
 
 ### sphere_plane_greysky
-<p align="center"><a href="./src/sphere_plane_greysky.jl"> <img src="./imgs/sphere_plane_greysky.png" width = "100%"></p>
+<p align="center"><a href="./scripts/sphere_plane_greysky.jl"> <img src="./imgs/sphere_plane_greysky.png" width = "100%"></p>
 
 ### sphere_source_light
 
-<p align="center"><a href="./src/sphere_source_light.jl"> <img src="./imgs/sphere_source_light.png" width = "100%"></p>
+<p align="center"><a href="./scripts/sphere_source_light.jl"> <img src="./imgs/sphere_source_light.png" width = "100%"></p>
 
 ### earth_ina_julia_box
 
-<p align="center"><a href="./src/earth_ina_julia_box.jl"> <img src="./imgs/earth_ina_julia_box.png" width = "100%"></p>
+<p align="center"><a href="./scripts/earth_ina_julia_box.jl"> <img src="./imgs/earth_ina_julia_box.png" width = "100%"></p>
 
 ### materials_julia_room
 
-<p align="center"><a href="./src/materials_julia_room.jl"> <img src="./imgs/materials_julia_room.png" width = "100%"></p>
+<p align="center"><a href="./scripts/materials_julia_room.jl"> <img src="./imgs/materials_julia_room.png" width = "100%"></p>
 
 ### earthquakes
 
-<p align="center"><a href="./src/earthquakes.jl"> <img src="./imgs/earthquakes2.png" width = "100%"></p>
+<p align="center"><a href="./scripts/earthquakes.jl"> <img src="./imgs/earthquakes2.png" width = "100%"></p>
 
 
 ### A better view ?
