@@ -22,6 +22,18 @@ Prelimilary examples to learn how to use RPRMakie.
 
 <p align="center"><a href="./scripts/earthquakes.jl"> <img src="./imgs/earthquakes2.png" width = "100%"></p>
 
+### Submarine Cables
+
+<p align="center"><a href="./scripts/submarineCables.jl"> <img src="./imgs/submarineCables.png" width = "100%"></p>
+
+### Random Graph
+
+<p align="center"><a href="./scripts/rrg.jl"> <img src="./imgs/rrg.png" width = "100%"></p>
+
+
+### UberM Example
+
+<p align="center"><a href="./scripts/uberMExample.jl"> <img src="./imgs/uberMExample.png" width = "100%"></p>
 
 ### A better view ?
 
