@@ -43,5 +43,5 @@ display(fig)
 context, task = RPRMakie.replace_scene_rpr!(ax.scene, screen)
 nothing # avoid printing stuff into the repl
 imageOut = colorbuffer(screen)
-save("transparentM_clean.png", imageOut) # save just screen scene.
+save("./imgs/transparentM_clean.png", imageOut) # save just screen scene.
 saveRPR("./imgs/transparentM", imageOut,  resolution=(950, 950))

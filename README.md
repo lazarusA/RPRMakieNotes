@@ -39,6 +39,10 @@ Prelimilary examples to learn how to use RPRMakie.
 
 <p align="center"><a href="./scripts/transparentM.jl"> <img src="./imgs/transparentM.png" width = "100%"></p>
 
+### Helix
+
+<p align="center"><a href="./scripts/helix.jl"> <img src="./imgs/helix.png" width = "100%"></p>
+
 ### A better view ?
 
 <img src="./imgs/betterview.png" width = "100%">
